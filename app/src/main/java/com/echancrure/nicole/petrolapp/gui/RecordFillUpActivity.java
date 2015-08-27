@@ -1,5 +1,8 @@
 package com.echancrure.nicole.petrolapp.gui;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.echancrure.nicole.petrolapp.R;
+
+import java.util.Calendar;
 
 import services.UTCTime;
 
@@ -43,7 +48,8 @@ public class RecordFillUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_fill_up);
         this.uTCDateTime = System.currentTimeMillis();
-        this.dateTimeTextView = (DatePicker) findViewById(R.id.datePicker);
+//        this.dateTimeTextView = (DatePicker) findViewById(R.id.datePicker);
+//        this.dateTimeTextView.setMaxDate(this.uTCDateTime); //cannot select a date of fill-up into the future
         this.odometerTextView = (TextView) findViewById(R.id.odometerField);
         this.volumeTextView = (TextView) findViewById(R.id.volumeField);
         this.priceTextView = (TextView) findViewById(R.id.priceField);
@@ -70,10 +76,33 @@ public class RecordFillUpActivity extends AppCompatActivity {
         }
     }
 
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
+    }
     /**
      * handle a fill-up submit: check that all the fields are in the correct format and send to the controller
      */
     private void handleSubmitButtonOnClick() {
         //TODO
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+        }
     }
 }

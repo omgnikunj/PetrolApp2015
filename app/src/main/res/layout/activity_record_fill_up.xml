@@ -1,131 +1,113 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.echancrure.nicole.petrolapp.gui.RecordFillUpActivity">
+    tools:context="com.echancrure.nicole.petrolapp.gui.RecordFillUpActivity"
+    android:orientation="vertical">
 
-    <DatePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/datePicker"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onClick" />
+
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/odometerField"
         android:layout_marginTop="98dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/odometerFieldText"
-        android:layout_alignLeft="@+id/datePicker"
-        android:layout_alignStart="@+id/datePicker"
-        android:textAlignment="center"
+        android:hint="@string/odometerFieldText"
         android:textColor="@color/abc_input_method_navigation_guard" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/volumeField"
-        android:text="@string/volumeFieldText"
-        android:textAlignment="center"
-        android:textColor="@color/abc_input_method_navigation_guard"
-        android:layout_below="@+id/odometerField"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/datePicker"
-        android:layout_alignStart="@+id/datePicker" />
+        android:hint="@string/volumeFieldText"
+        android:textColor="@color/abc_input_method_navigation_guard" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/priceField"
-        android:text="@string/priceFieldText"
-        android:textAlignment="center"
+        android:hint="@string/priceFieldText"
         android:textColor="@color/abc_input_method_navigation_guard"
-        android:layout_below="@+id/volumeField"
-        android:inputType="number"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/datePicker"
-        android:layout_alignStart="@+id/datePicker" />
+        android:inputType="number" />
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fullTankBool"
         android:id="@+id/radioButton"
-        android:layout_below="@+id/priceField"
-        android:layout_centerHorizontal="true"
-        android:checked="false" />
-
-    <ImageButton
+        android:checked="false"
+        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cameraButton"
-        android:src="@android:drawable/ic_menu_camera"
-        android:layout_below="@+id/radioButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
-
-    <TextView
+        android:src="@android:drawable/ic_menu_camera"/>
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/attachReceiptLabel"
-        android:id="@+id/attachReceiptLabel"
-        android:layout_below="@+id/cameraButton"
-        android:layout_alignRight="@+id/cameraButton"
-        android:layout_alignEnd="@+id/cameraButton" />
+        android:id="@+id/attachReceiptLabel"/>
+    </LinearLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cancelButton"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:onClick="onClick"
-        android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp"
-        android:layout_above="@+id/textView"
-        android:layout_alignLeft="@+id/datePicker"
-        android:layout_alignStart="@+id/datePicker" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cancelText"
-        android:id="@+id/textView"
-        android:layout_alignBottom="@+id/datePicker"
-        android:layout_alignLeft="@+id/cancelButton"
-        android:layout_alignStart="@+id/cancelButton" />
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/submitButton"
-        android:src="@android:drawable/ic_menu_upload"
-        android:onClick="onClick"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/radioButton"
-        android:layout_toEndOf="@+id/radioButton"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submitText"
-        android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/datePicker"
-        android:layout_alignLeft="@+id/submitButton"
-        android:layout_alignStart="@+id/submitButton" />
-</RelativeLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancelButton"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:onClick="onClick"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancelText"
+                android:id="@+id/textView" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/submitButton"
+                    android:src="@android:drawable/ic_menu_upload"
+                    android:onClick="onClick" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/submitText"
+                    android:id="@+id/textView2" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

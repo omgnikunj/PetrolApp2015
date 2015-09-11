@@ -39,13 +39,13 @@
         android:textColor="@color/abc_input_method_navigation_guard"
         android:inputType="number" />
 
-    <RadioButton
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fullTankBool"
-        android:id="@+id/radioButton"
+        android:id="@+id/partialFillUpCheckBox"
         android:checked="false"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

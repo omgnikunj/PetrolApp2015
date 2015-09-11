@@ -9,10 +9,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import model.PetrolTracker;
 import com.echancrure.nicole.petrolapp.R;
 
 import java.util.Calendar;
@@ -33,6 +35,8 @@ public class RecordFillUpActivity extends AppCompatActivity {
     private TextView priceTextView;
     /** the view holding the volume reading */
     private TextView volumeTextView;
+    /** Radio button for the partial fillup */
+    private CheckBox partialCheckBox;
     /** the odometer value to save */
     private int odometer;
     /** the price to save */
@@ -51,6 +55,7 @@ public class RecordFillUpActivity extends AppCompatActivity {
         this.odometerTextView = (TextView) findViewById(R.id.odometerField);
         this.volumeTextView = (TextView) findViewById(R.id.volumeField);
         this.priceTextView = (TextView) findViewById(R.id.priceField);
+        this.partialCheckBox = (CheckBox) findViewById(R.id.partialFillUpCheckBox);
     }
 
     /**
@@ -78,7 +83,47 @@ public class RecordFillUpActivity extends AppCompatActivity {
      * handle a fill-up submit: check that all the fields are in the correct format and send to the controller
      */
     private void handleSubmitButtonOnClick() {
-        //TODO
+        PetrolTracker petrolTracker = PetrolTracker.getInstance();
+        if (standardiseFields()) {
+            boolean success = petrolTracker.reportFillUp(this, uTCDateTime, this.odometer, this.price, this.volume, partial);
+            if (success) {
+                Toast.makeText(RecordFillUpActivity.this, "Fill Up successfully reported. Thank You.", Toast.LENGTH_LONG).show();
+                this.finish();
+            } else {
+                Log.d(TAG, "unsuccessful API call to report a fill up");
+                Toast.makeText(RecordFillUpActivity.this, "A problem occurred. Please try again.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
+    /**
+     * checks if the fields entered by the user are valid (i.e. present, in the right format and range)
+     * and transform them in default format
+     * @return whether he operation was successful or not
+     */
+    private boolean standardiseFields() {
+        final String odometerString = (String) this.odometerTextView.getText().toString();
+        final String priceString = (String) this.priceTextView.getText().toString();
+        final String volumeString = (String) this.volumeTextView.getText().toString();
+        try {
+            this.odometer = Integer.parseInt(odometerString);
+        } catch (NumberFormatException e) {
+            Toast.makeText(RecordFillUpActivity.this, "The odometer field must be valid number", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        try {
+            this.price = Integer.parseInt(priceString);
+        } catch (NumberFormatException e) {
+            Toast.makeText(RecordFillUpActivity.this, "The price field must be valid number, no dot", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        try {
+            this.volume = Float.valueOf(volumeString);
+        } catch (NumberFormatException e) {
+            Toast.makeText(RecordFillUpActivity.this, "The volume field must be valid number", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        this.partial = partialCheckBox.isChecked();
+        return true;
+    }
 }

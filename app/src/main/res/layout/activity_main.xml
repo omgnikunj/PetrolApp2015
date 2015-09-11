@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Record Fill Up"
         android:id="@+id/recordFillUpButton"
-        android:layout_alignTop="@+id/textView"
+        android:layout_alignTop="@+id/attachReceiptLabel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
